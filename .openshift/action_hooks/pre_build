@@ -1,0 +1,11 @@
+#!/bin/bash
+# This is a simple script and will be executed on your CI system if
+# available.  Otherwise it will execute while your application is stopped
+# before the build step.  This script gets executed directly, so it
+# could be python, php, ruby, etc.
+
+if [[ "$OPENSHIFT_PHP_VERSION" == "5.3" ]]; then
+  echo "ERROR: This quickstart is not compatible with PHP 5.3"
+  echo "ERROR: Please use the php-5.4 application type."
+  exit 1
+fi

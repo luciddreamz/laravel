@@ -1,0 +1,86 @@
+#!/bin/bash
+# This deploy hook gets executed after dependencies are resolved and the
+# build hook has been run but before the application has been started back
+# up again.  This script gets executed directly, so it could be python, php,
+# ruby, etc.
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+set -e
+
+echo 1>&2
+echo "Setting environment variables..." 1>&2
+
+export APP_ENV="${APPLICATION_ENV:-production}"
+if [ "$(type -t set_env_var)" == "function" ]; then
+  set_env_var 'APP_ENV' $APP_ENV $OPENSHIFT_HOMEDIR/.env/user_vars  
+fi
+
+if [ ! -z "$OPENSHIFT_APP_DNS" ]; then
+  export APP_URL="$OPENSHIFT_APP_DNS"
+  if [ "$(type -t set_env_var)" == "function" ]; then
+    set_env_var 'APP_URL' $APP_URL $OPENSHIFT_HOMEDIR/.env/user_vars
+  fi
+fi
+
+if [ ! -z "$OPENSHIFT_SECRET_TOKEN" ]; then
+  export APP_KEY=${OPENSHIFT_SECRET_TOKEN:0:31}
+  if [ "$(type -t set_env_var)" == "function" ]; then
+    set_env_var 'APP_KEY' $APP_KEY $OPENSHIFT_HOMEDIR/.env/user_vars
+  fi
+fi
+
+if [ ! -z "$OPENSHIFT_POSTGRESQL_DB_HOST" ]; then
+  export DB_DRIVER="pgsql"
+fi
+
+if [ ! -z "$OPENSHIFT_MYSQL_DB_HOST" ]; then
+  export DB_DRIVER="mysql"
+fi
+
+if [ -z "$DB_DRIVER" ]; then
+  echo 1>&2
+  echo "Could not find the database cartridge.  Please run:" 1>&2
+  echo "rhc cartridge add -a $OPENSHIFT_APP_NAME -c mysql-5.5" 1>&2
+  echo "or"
+  echo "rhc cartridge add -a $OPENSHIFT_APP_NAME -c postgresql-9.2" 1>&2
+  echo "then make a sample commit (add whitespace somewhere) and re-push" 1>&2
+  echo 1>&2
+  exit 5
+else
+  echo 1>&2
+  echo "Database driver set to '$DB_DRIVER'..." 1>&2
+  echo 1>&2
+  if [ "$(type -t set_env_var)" == "function" ]; then
+    set_env_var 'DB_DRIVER' $DB_DRIVER $OPENSHIFT_HOMEDIR/.env/user_vars
+  fi
+fi
+
+echo 1>&2
+echo "Migrating storage and log directories..." 1>&2
+echo 1>&2
+# If this is initial installation, copy the default storage directory
+# from official Laravel installation and remove the log directory
+#
+if [ ! -d ${OPENSHIFT_DATA_DIR}storage ]; then
+  mv ${OPENSHIFT_REPO_DIR}storage ${OPENSHIFT_DATA_DIR}storage
+  rm -rf ${OPENSHIFT_DATA_DIR}storage/logs
+fi
+
+# Create symlink to new storage directory location
+ln -sf ${OPENSHIFT_DATA_DIR}storage   ${OPENSHIFT_REPO_DIR}storage
+
+# Create a symlink to the new log directory location
+ln -sf ${OPENSHIFT_LOG_DIR}   ${OPENSHIFT_DATA_DIR}storage/logs
+
+# Use repository .env
+if [  -f ${OPENSHIFT_REPO_DIR}.openshift/.env ]; then
+  cp -f ${OPENSHIFT_REPO_DIR}.openshift/.env ${OPENSHIFT_REPO_DIR}/.env
+fi
+
+echo 1>&2
+echo "Running 'php artisan migrate --force'..." 1>&2
+echo 1>&2
+pushd ${OPENSHIFT_REPO_DIR} > /dev/null
+echo "php artisan migrate --force"
+popd > /dev/null

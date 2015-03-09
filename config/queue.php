@@ -27,6 +27,10 @@ return [
 	| is used by your application. A default configuration has been added
 	| for each back-end shipped with Laravel. You are free to add more.
 	|
+	| OpenShift Notes: IronMQ/IronWorker
+	| See: https://developers.openshift.com/en/marketplace-ironmq.html
+	| See: https://developers.openshift.com/en/marketplace-ironworker.html
+	|
 	*/
 
 	'connections' => [

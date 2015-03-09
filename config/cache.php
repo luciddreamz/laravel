@@ -24,6 +24,11 @@ return [
 	| well as their drivers. You may even define multiple stores for the
 	| same cache driver to group types of items stored in your caches.
 	|
+	| OpenShift Notes: APC|Memcached|Redis
+	| See: http://docs.openshift.org/origin-m4/oo_cartridge_guide.html#environment-variables-9
+	| See: https://developers.openshift.com/en/marketplace-memcachedcloud.html
+	| See: https://developers.openshift.com/en/marketplace-rediscloud.html
+	|
 	*/
 
 	'stores' => [

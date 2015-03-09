@@ -14,6 +14,10 @@ return [
 	| Supported: "file", "cookie", "database", "apc",
 	|            "memcached", "redis", "array"
 	|
+	| OpenShift Notes: Memcached
+	| See: https://developers.openshift.com/en/marketplace-memcached-cloud.html
+	| See: https://developers.openshift.com/en/marketplace-memcachier.html
+	|
 	*/
 
 	'driver' => env('SESSION_DRIVER', 'file'),
