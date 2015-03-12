@@ -15,7 +15,7 @@ running your application on OpenShift.
 
 ### Local vs. Remote Development ###
 This Laravel QuickStart provides separate `.env` configuration files for both local and 
-remote development, found at `.env` and `.openshift/.env` respectively.
+remote development, found at `.env` and `.openshift/.env` respectively. When the local repo is pushed into openshift, `.openshift/.env` is overwritten with `.env` file.  `  
 
 ### Remote Development ###
 Your application is configured to automatically use your OpenShift MySQL or PostgreSQL 
@@ -27,6 +27,10 @@ production on OpenShift.
 The Laravel `CACHE_DRIVER` is set to use [APC opcode caching](http://php.net/manual/en/book.apc.php)
 and the `SESSION_DRIVER` is set to use the local file system for storage. Feel 
 free to update these settings in `.openshift/.env`.
+
+### Composer ###
+When the application is pushed , `composer update` is automatically executed over the root directory. For more details see the OpenShift Docs.
+
 
 ### 'Development' Mode ###
 When you develop your Laravel application in OpenShift, you can also enable the
