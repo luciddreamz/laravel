@@ -41,18 +41,27 @@ When you develop your Laravel application in OpenShift, you can also enable the
 using the `rhc` client, like:
 
 ```
-$ rhc env set APPLICATION_ENV=development
+$ rhc env set APPLICATION_ENV=development -a <app-name>
+```
+
+Then, restart your application:
+
+```
+$ rhc app restart -a <app-name>
 ```
 
 If you do so, OpenShift will run your application under 'development' mode.
 In development mode, your application will:
 
-* Set Laravel's `APP_ENV` to 'development'
+* Set Laravel's `APP_ENV` to 'development' and `APP_DEBUG` to 'true'
 * Ignore your composer.lock file
 * Show more detailed errors in browser
 * Display startup errors
 * Enable the [Xdebug PECL extension](http://xdebug.org/)
 * Enable [APC stat check](http://php.net/manual/en/apc.configuration.php#ini.apc.stat)
+
+Set the variable to 'production' and restart your app to deactivate error reporting 
+and resume production PHP settings.
 
 Using the development environment can help you debug problems in your application
 in the same way as you do when developing on your local machine. However, we strongly 

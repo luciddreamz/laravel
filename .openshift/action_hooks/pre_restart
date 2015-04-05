@@ -21,8 +21,14 @@ echo 1>&2
 echo "Setting environment variables..." 1>&2
 
 export APP_ENV="${APPLICATION_ENV:-production}"
+if [[ "${APPLICATION_ENV:-}" != "development" ]]; then
+  export APP_DEBUG=false
+else
+  export APP_DEBUG=true
+fi
 if [ "$(type -t set_env_var)" == "function" ]; then
-  set_env_var 'APP_ENV' $APP_ENV $OPENSHIFT_HOMEDIR/.env/user_vars  
+  set_env_var 'APP_ENV' $APP_ENV $OPENSHIFT_HOMEDIR/.env/user_vars
+  set_env_var 'APP_DEBUG' $APP_DEBUG $OPENSHIFT_HOMEDIR/.env/user_vars
 fi
 
 if [ ! -z "$OPENSHIFT_APP_DNS" ]; then
