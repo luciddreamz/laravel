@@ -42,6 +42,9 @@ return [
 	| so make sure you have the driver for your particular database of
 	| choice installed on your machine before you begin development.
 	|
+	| OpenShift Notes:
+	|   MySQL:      https://developers.openshift.com/en/databases-mysql.html
+	|   PostgreSQL: https://developers.openshift.com/en/databases-postgresql.html
 	*/
 
 	'connections' => [
@@ -101,8 +104,9 @@ return [
 	| provides a richer set of commands than a typical key-value systems
 	| such as APC or Memcached. Laravel makes it easy to dig right in.
 	|
-	| OpenShift Notes: Redis Cloud
-	| See: https://developers.openshift.com/en/marketplace-redis-cloud.html
+	| OpenShift Notes: 
+	|   Redis:       https://hub.openshift.com/addons/34-redis
+	|   Redis Cloud: https://hub.openshift.com/addons/17-rediscloud
 	|
 	*/
 

@@ -14,9 +14,11 @@ return [
 	| Supported: "file", "cookie", "database", "apc",
 	|            "memcached", "redis", "array"
 	|
-	| OpenShift Notes: Memcached
-	| See: https://developers.openshift.com/en/marketplace-memcached-cloud.html
-	| See: https://developers.openshift.com/en/marketplace-memcachier.html
+	| OpenShift Notes:
+	|   Memcached:       https://hub.openshift.com/addons/33-memcached
+	|   Memcached Cloud: https://hub.openshift.com/addons/12-memcachedcloud
+	|   Redis:           https://hub.openshift.com/addons/34-redis
+	|   Redis Cloud:     https://hub.openshift.com/addons/17-rediscloud
 	|
 	*/
 

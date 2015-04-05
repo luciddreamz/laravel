@@ -14,6 +14,12 @@ return [
 	| Supported: "null", "sync", "database", "beanstalkd",
 	|            "sqs", "iron", "redis"
 	|
+	| OpenShift Notes:
+	|   IronMQ:     https://hub.openshift.com/addons/9-ironmq
+	|   IronWorker: https://hub.openshift.com/addons/10-ironworker
+	|   Redis:      https://hub.openshift.com/addons/34-redis
+	|   Redis Cloud:     https://hub.openshift.com/addons/17-rediscloud
+	|
 	*/
 
 	'default' => env('QUEUE_DRIVER', 'sync'),
@@ -26,10 +32,6 @@ return [
 	| Here you may configure the connection information for each server that
 	| is used by your application. A default configuration has been added
 	| for each back-end shipped with Laravel. You are free to add more.
-	|
-	| OpenShift Notes: IronMQ/IronWorker
-	| See: https://developers.openshift.com/en/marketplace-ironmq.html
-	| See: https://developers.openshift.com/en/marketplace-ironworker.html
 	|
 	*/
 

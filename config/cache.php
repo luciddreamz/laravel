@@ -11,6 +11,13 @@ return [
 	| using this caching library. This connection is used when another is
 	| not explicitly specified when executing a given caching function.
 	|
+	| OpenShift Notes:
+	|   APC:             http://docs.openshift.org/origin-m4/oo_cartridge_guide.html#environment-variables-9
+	|   Memcached:       https://hub.openshift.com/addons/33-memcached
+	|   Memcached Cloud: https://hub.openshift.com/addons/12-memcachedcloud
+	|   Redis:           https://hub.openshift.com/addons/34-redis
+	|   Redis Cloud:     https://hub.openshift.com/addons/17-rediscloud
+	|
 	*/
 
 	'default' => env('CACHE_DRIVER', 'file'),
@@ -23,11 +30,6 @@ return [
 	| Here you may define all of the cache "stores" for your application as
 	| well as their drivers. You may even define multiple stores for the
 	| same cache driver to group types of items stored in your caches.
-	|
-	| OpenShift Notes: APC|Memcached|Redis
-	| See: http://docs.openshift.org/origin-m4/oo_cartridge_guide.html#environment-variables-9
-	| See: https://developers.openshift.com/en/marketplace-memcachedcloud.html
-	| See: https://developers.openshift.com/en/marketplace-rediscloud.html
 	|
 	*/
 
