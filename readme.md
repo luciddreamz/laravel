@@ -84,18 +84,13 @@ To stop tailing the logs, press *Ctrl + c*.
 1. Create a Laravel application:
 
     ```
-    rhc app create laravelapp https://raw.githubusercontent.com/luciddreamz/openshift-php/master/metadata/manifest.yml mysql-5.5 --from-code=https://github.com/luciddreamz/laravel
+    rhc app create laravelapp php-5.4 mysql-5.5 --from-code=https://github.com/luciddreamz/laravel
     ```
     or
 
     ```
-    rhc app create laravelapp https://raw.githubusercontent.com/luciddreamz/openshift-php/master/metadata/manifest.yml postgresql-9.2 --from-code=https://github.com/luciddreamz/laravel
+    rhc app create laravelapp php-5.4 postgresql-9.2 --from-code=https://github.com/luciddreamz/laravel
     ```
-
-   **Note:** This QuickStart is setup to use a [custom version](https://github.com/luciddreamz/openshift-php) of the OpenShift PHP 5.4 
-   cartridge with the latest version of Composer installed. The version of Composer that 
-   ships with OpenShift's current PHP 5.4 cartridge is slightly out of date will error when 
-   it encounters Laravel's more recent version syntax (ex. Invalid version string "^1.0.1").
 
 ## Additional Resources ##
 Documentation for the Laravel framework can be found on the [Laravel website](http://laravel.com/docs). Check 
