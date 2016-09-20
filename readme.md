@@ -5,6 +5,8 @@ designed for the development of model–view–controller (MVC) web applications
 This QuickStart was created to make it easy to get started with Laravel 5.0 on
 OpenShift.
 
+> Looking for Laravel 5.2? Check out my [Laravel 5.2 QuickStart](https://github.com/luciddreamz/laravel-ex) for OpenShift 3.
+
 The simplest way to install this application is to use the [OpenShift
 QuickStart](https://hub.openshift.com/quickstarts/115-laravel-5-0). If 
 you'd like to install it manually, follow [these directions](#manual-installation).
